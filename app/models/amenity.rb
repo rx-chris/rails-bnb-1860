@@ -4,5 +4,5 @@ class Amenity < ApplicationRecord
 
   AMENITIES = ["Wi-Fi", "Air Conditioning", "Heating", "Kitchen", "Free Parking", "Towels", "Bed Linens", "Soap", "Toilet Paper", "Television", "Washer", "Dryer", "Hair Dryer", "Iron", "Coffee Maker", "Tea Kettle", "Smoke Alarm", "Carbon Monoxide Detector", "First Aid Kit", "Fire Extinguisher"];
 
-  validates :name, presence: true, inclusion: AMENITIES
+  validates :name, presence: true, inclusion: { in: AMENITIES }
 end
