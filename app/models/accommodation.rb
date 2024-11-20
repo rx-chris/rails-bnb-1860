@@ -14,4 +14,8 @@ class Accommodation < ApplicationRecord
   validates :bed_count, presence: true
   validates :bedroom_count, presence: true
   validates :bathroom_count, presence: true
+
+  def host_name
+    user.display_name
+  end
 end
