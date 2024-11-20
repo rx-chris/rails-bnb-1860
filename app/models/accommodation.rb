@@ -1,5 +1,7 @@
 class Accommodation < ApplicationRecord
   belongs_to :user
+  has_many :accommodation_amenities
+  has_many :amenities, through: :accommodation_amenities
 
   TYPES_OF_PLACE = ["Room", "Entire home"]
 
