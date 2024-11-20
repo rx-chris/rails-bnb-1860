@@ -1,0 +1,14 @@
+<h1>Hosting an Accommodation for Guest</h1>
+
+<%= simple_form_for(@accommodation) do |f| %>
+  <%= f.input :type_of_place %>
+  <%= f.input :price %>
+  <%= f.input :address %>
+  <%= f.input :bed_count %>
+  <%= f.input :bedroom_count %>
+  <%= f.input :bathroom_count %>
+  <%= f.input :bathroom_count %>
+  <%= f.input :amenities, as: :check_boxes %>
+  <%#= f.input :name, as: :check_boxes, collection: ["Wi-Fi", "Air Conditioning", "Heating", "Kitchen", "Free Parking", "Towels", "Bed Linens", "Soap", "Toilet Paper", "Television", "Washer", "Dryer", "Hair Dryer", "Iron", "Coffee Maker", "Tea Kettle", "Smoke Alarm", "Carbon Monoxide Detector", "First Aid Kit", "Fire Extinguisher"] %>
+  <%= f.submit %>
+<% end %>

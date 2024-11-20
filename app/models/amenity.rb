@@ -6,3 +6,13 @@ class Amenity < ApplicationRecord
 
   validates :name, presence: true, inclusion: { in: NAMES }
 end
+
+# wifi = Amenity.create!(name: 'Wi-Fi')
+# aircon = Amenity.create!(name: 'Air Conditioning')
+# heating = Amenity.create!(name: 'Heating')
+# kitchen = Amenity.create!(name: 'Kitchen')
+
+# @accommodation = Accommodation.first
+
+# @accommodation.amenities << wifi
+# @accommodation.amenities << heating
