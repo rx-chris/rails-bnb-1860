@@ -1,21 +1,28 @@
-<div class="container-fluid">
-  <div class="d-flex">
-    <h1><%= @accommodation.name %></h1>
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <h1>Accommodation Name</h1>
     <div class="d-flex">
-      <a href="url">Share</a>
-      <a href="url">Save</a>
+      <a href="#">Share</a> |
+      <a href="#">Save</a>
     </div>
   </div>
 
-  <div class="host-images col-6">
-    <div>1 big image</div>
-    <div class="col-6">4 images</div>
+  <div class="host-images">
+    <%= image_tag "pic1.jpg", alt: "" %>
+    <%= image_tag "pic2.jpg", alt: "" %>
+    <%= image_tag "pic3.jpg", alt: "" %>
+    <%= image_tag "pic4.jpg", alt: "" %>
+    <%= image_tag "pic5.jpg", alt: "" %>
   </div>
 
-  <div class="row">
-    <div class="col-8">Accommodation Details</div>
+  <hr>
 
-      <div><h2>Entire apartment in Johor Bahru, Malaysia<h2>
+  <div class="row">
+    <div class="col-8 p-5">
+      <p>Accommodation details here:</p>
+
+      <div>
+      <h2>Entire apartment in Johor Bahru, Malaysia<h2>
           <ul>
           <li>max_guest_count</li>
           <li>bedroom_count</li>
@@ -99,9 +106,11 @@
         <h2>Things to know</h2>
       </div>
 
-
-    <div class="col-4">Reservation form</div>
-
+    </div>
+    <div class="col-4 p-5">
+      <p>Reservation form here</p>
+    </div>
   </div>
+
 
 </div>
