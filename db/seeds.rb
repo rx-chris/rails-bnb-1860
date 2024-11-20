@@ -32,16 +32,14 @@ USERNAMES.each do |username|
   )
 end
 
-users = User.all
-puts "Created #{users.length} users"
+puts "Created #{User.all.length} users"
 
 # create amenities
 Amenity::NAMES.each do |name|
   Amenity.create!(name: name)
 end
 
-amenities = Amenity.all
-puts "Created #{amenities.length} Amenities"
+puts "Created #{Amenity.all.length} Amenities"
 
 # create accomodations
 30.times do |i|
@@ -53,42 +51,50 @@ puts "Created #{amenities.length} Amenities"
     bed_count: rand(0..5),
     bedroom_count: rand(0..5),
     bathroom_count: rand(0..5),
-    user: users.sample
+    user: User.all.sample
   )
 end
 
-accommodations = Accommodation.all
-puts "Created #{accommodations.length} accomodation"
+puts "Created #{Accommodation.all.length} accomodation"
 
 # create bookings
-today = Date.today
-
 20.times do |i|
-  days_after_today = rand(2..5)
-  start_date = today + rand(2..5)
+  start_date = Date.today + rand(2..5)
   end_date = start_date + rand(3..10)
   Booking.create!(
     start_date: start_date,
     end_date: end_date,
     guest_count: rand(1..7),
     status: Booking::STATUSES.sample,
-    user: users.sample,
-    accommodation: accommodations.sample
+    user: User.all.sample,
+    accommodation: Accommodation.all.sample
   )
 end
 
-bookings = Booking.all
-puts "Created #{bookings.length} bookings"
+puts "Created #{Booking.all.length} bookings"
 
-# reviews
+# create accommodation amenities
+120.times do |i|
+  accommodation = Accommodation.all.sample
+  filtered_amenities = Amenity.all.reject do |amenity|
+    accommodation.amenities.find { |accom_amenity| accom_amenity.id == amenity.id }
+  end
+
+  a = AccommodationAmenity.new(
+    accommodation: accommodation,
+    amenity: filtered_amenities.sample
+  )
+  a.save!
+end
+
+# create reviews
 40.times do |i|
   Review.create!(
     content: Faker::Restaurant.review,
     rating: rand(1..5),
-    accommodation: accommodations.sample,
-    user: users.sample
+    accommodation: Accommodation.all.sample,
+    user: User.all.sample
   )
 end
 
-reviews = Review.all
-puts "Created #{reviews.length} reviews"
+puts "Created #{Review.all.length} reviews"
