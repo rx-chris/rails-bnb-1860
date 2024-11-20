@@ -5,9 +5,17 @@ class AccommodationsController < ApplicationController
 
   def create
     @accommodation = Accommodation.new(accommodation_params)
-    raise
-    @accommodation.save
-    redirect_to accommodations_path
+    @accommodation.user = current_user
+
+    amenities = params[:accommodation][:amenities].reject { |a| a.empty? }
+    amenities.each do |amenity_id|
+      @accommodation.amenities << Amenity.find(amenity_id)
+    end
+    if @accommodation.save
+      redirect_to accommodations_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
