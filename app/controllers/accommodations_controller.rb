@@ -4,7 +4,8 @@ class AccommodationsController < ApplicationController
   end
 
   def create
-    @accommodation = Accommodation.new
+    @accommodation = Accommodation.new(accommodation_params)
+    raise
     @accommodation.save
     redirect_to accommodations_path
   end
