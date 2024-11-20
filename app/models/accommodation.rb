@@ -8,6 +8,7 @@ class Accommodation < ApplicationRecord
   TYPES_OF_PLACE = ["Room", "Entire home"]
 
   validates :type_of_place, presence: true, inclusion: { in: TYPES_OF_PLACE }
+  validates :title, presence: true, uniqueness: true
   validates :price, presence: true
   validates :address, presence: true
   validates :bed_count, presence: true
