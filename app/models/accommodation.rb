@@ -13,6 +13,10 @@ class Accommodation < ApplicationRecord
   validates :bed_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :bedroom_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :bathroom_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :city, presence: true
+  validates :country, presence: true
+  validates :description, presence: true
+  validates :max_guest_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   def host_name
     user.display_name
