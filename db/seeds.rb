@@ -100,7 +100,7 @@ ACCOMMODATION_TITLES.each do |title|
     bathroom_count: rand(1..5),
     city: Faker::Address.city,
     country: Faker::Address.country,
-    max_guest_count: rand(1..5),
+    max_guest_count: rand(1..7),
     description: Faker::Lorem.paragraph,
     user: User.all.sample
   )
