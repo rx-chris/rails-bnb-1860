@@ -36,9 +36,10 @@
   <div class="row">
     <div class="col-8">
       <div>
-        <h2><%=  @accommodation.type_of_place %> in "location"</h2>
+        <h2><%=  @accommodation.type_of_place %> in <%= @accommodation.city %>, <%= @accommodation.country
+         %></h2>
           <ul style="list-style: none" class="side-by-side">
-            <li>max_guest_count</li>
+            <li><%= @accommodation.max_guest_count %></li>
             <li><%= @accommodation.bedroom_count %> bedrooms</li>
             <li><%= @accommodation.bed_count %> beds</li>
             <li><%= @accommodation.bathroom_count %> bathrooms</li>
