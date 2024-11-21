@@ -39,12 +39,56 @@ puts "Created #{User.all.length} users"
   Amenity.create!(name: name)
 end
 
-puts "Created #{Amenity.all.length} Amenities"
+puts "Created #{Amenity.all.length} amenities"
 
 # create accomodations
-30.times do |i|
+ACCOMMODATION_TITLES = [
+  'Seaside Serenity',
+  'Tranquil Haven',
+  'Blissful Retreat',
+  'Ocean Breeze Cottage',
+  'Evergreen Escape',
+  'Sunnyvale Lodge',
+  'Whispering Pines',
+  'Dreamcatcher Lodge',
+  'Sunset View Villa',
+  'Cozy Cove',
+  'Lakeside Hideaway',
+  'The Happy Nest',
+  'Starry Skies Cabin',
+  'Rustic Charm Lodge',
+  'The Wanderlust Retreat',
+  'Mountain Peak Lodge',
+  'Paradise Point',
+  'The Charmed Cabin',
+  'Nature’s Nook',
+  'The Relaxation Station',
+  'Serendipity Shores',
+  'The Enchanted Cottage',
+  'Blissful Beach House',
+  'The Cozy Getaway',
+  'Cloud Nine Retreat',
+  'The Joyful Journey',
+  'The Dreamy Dune',
+  'Harbor Haven',
+  'The Welcoming Window',
+  'Timeless Tranquility',
+  'The Happy Harbor',
+  'Sandy Toes Retreat',
+  'The Golden Sunset',
+  'The Whimsical Oasis',
+  'The Peaceful Perch',
+  'Meadowview Cottage',
+  'The Blissful Bungalow',
+  'Sunflower Sanctuary',
+  'The Solitude Sanctuary',
+  'The Lush Escap'
+]
+
+ACCOMMODATION_TITLES.each do |title|
   Accommodation.create!(
     type_of_place: Accommodation::TYPES_OF_PLACE.sample,
+    title: title,
     price: rand(100..500),
     rating: rand(0..5),
     address: Faker::Address.full_address,
@@ -55,7 +99,7 @@ puts "Created #{Amenity.all.length} Amenities"
   )
 end
 
-puts "Created #{Accommodation.all.length} accomodation"
+puts "Created #{Accommodation.all.length} accommodation"
 
 # create bookings
 20.times do |i|
