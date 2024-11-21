@@ -1,11 +1,8 @@
 class Accommodation < ApplicationRecord
-  has_many :reviews, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :accommodation_amenities, dependent: :destroy
   has_many :amenities, through: :accommodation_amenities
   belongs_to :user
-  has_many :accommodation_amenities
-  has_many :amenities, through: :accommodation_amenities
 
   TYPES_OF_PLACE = ["Room", "Entire home"]
 
