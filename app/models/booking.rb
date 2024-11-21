@@ -1,7 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :accommodation
-  has_many :reviews
+  has_one :review
   STATUSES = ["Pending", "Accepted", "Declined"].freeze
 
   validates :start_date, presence: true
