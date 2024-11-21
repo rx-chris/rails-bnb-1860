@@ -172,18 +172,36 @@
     <div class="col-4">
       <div class="bg-white rounded shadow p-3">
         <h2>$62 SGD night</h2>
-        <%# <input type="text" data-controller="datepicker"> %>
-        <div class="d-flex justify-content-between p-3">
-          <p>Check-in</p>
-          <p>Check-out</p>
+        <div class="d-flex justify-content-between p-3 border rounded">
+          <div>
+            <p>Check-in</p>
+            <input type="text" data-controller="datepicker" class="w-100">
+          </div>
+
+          <div>
+            <p>Check-out</p>
+            <input type="text" data-controller="datepicker" class="w-100">
+          </div>
+
         </div>
 
-        <div class="d-flex p-3">
-          <p>Guest dropdown button</p>
+        <div class="d-flex p-3 border rounded">
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown link
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Adults</a></li>
+              <li><a class="dropdown-item" href="#">Children</a></li>
+              <li><a class="dropdown-item" href="#">Infants</a></li>
+              <li><a class="dropdown-item" href="#">Pets</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div class="d-grid mx-auto">
-          <button class="btn btn-primary btn-border-radius" type="button">Reserve</button>
+        <div class="d-grid mx-auto p-3">
+          <button class="btn btn-border-radius btn-primary" type="button">Reserve</button>
         </div>
 
         <p class="text-center p-3">You won't be charged yet</p>
@@ -192,47 +210,47 @@
         <div class="d-flex justify-content-between p-3">
           <div class="row">
             <div class="col-6">
-              <p>$62 SGD x 5 nights</p>
+              <a href="#">$62 SGD x 5 nights</a>
             </div>
             <div class="col-6">
               <p>$310 SGD</p>
             </div>
             <div class="col-6">
-              <p>Cleaning fee</p>
+              <a href="#">Cleaning fee</a>
             </div>
             <div class="col-6">
               <p>$15 SGD</p>
             </div>
             <div class="col-6">
-              <p>Airbnb service fee</p>
+              <a href="#">Airbnb service fee</a>
             </div>
             <div class="col-6">
               <p>$58 SGD</p>
             </div>
           </div>
-      </div>
+        </div>
 
+
+
+        <div class="d-flex justify-content-between p-3">
+
+        </div>
 
         <hr>
 
         <div class="d-flex justify-content-between p-3">
-          <div class="row">
-            <div class="col-6">
-              <p></strong>Total before taxes</strong></p>
-            </div>
-
-            <div class="col-6">
-              <p>$383 SGD</p>
-            </div>
-
-          </div>
+          <p></strong>Total before taxes</strong></p>
+          <p>$383 SGD</p>
         </div>
+      </div>
+
+      <div class="d-flex">
 
       </div>
 
-
-      </div>
     </div>
 
+
   </div>
+
 </div>
