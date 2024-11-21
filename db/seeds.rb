@@ -136,8 +136,7 @@ end
   Review.create!(
     content: Faker::Restaurant.review,
     rating: rand(1..5),
-    accommodation: Accommodation.all.sample,
-    user: User.all.sample
+    booking: Booking.all.sample
   )
 end
 
