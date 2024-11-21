@@ -3,10 +3,10 @@ require 'faker'
 # clear all tables
 User.destroy_all
 Amenity.destroy_all
+Review.destroy_all # moved review up to destroy before booking
 Booking.destroy_all
 Accommodation.destroy_all
 AccommodationAmenity.destroy_all
-Review.destroy_all
 
 puts 'Cleared all tables'
 
