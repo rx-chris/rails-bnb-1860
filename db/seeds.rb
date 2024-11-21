@@ -1,4 +1,24 @@
 require 'faker'
+require 'open-uri'
+
+# download images
+images_dir = "#{Rails.root}/app/assets/images/accommodations"
+
+accommodation_photo_list = []
+
+Dir.foreach(images_dir) do |filename|
+  next if filename == '.' or filename == '..'
+  full_path = "#{images_dir}/#{filename}"
+
+  File.open(full_path, 'r') do |file|
+    image_urls = JSON.parse(file.read) # array of 5 image URLs
+    images = image_urls.map do |image_url|
+      puts "parsing #{image_url}"
+      URI.parse(image_url).open
+    end
+    accommodation_photo_list.push(images)
+  end
+end
 
 # clear all tables
 User.destroy_all
@@ -89,12 +109,13 @@ ACCOMMODATION_TITLES = [
 ]
 
 ACCOMMODATION_TITLES.each do |title|
-  Accommodation.create!(
+  accommodation = Accommodation.new(
     type_of_place: Accommodation::TYPES_OF_PLACE.sample,
     title: title,
     price: rand(100..500),
     rating: rand(0..5),
     address: Faker::Address.full_address,
+
     bed_count: rand(1..5),
     bedroom_count: rand(1..5),
     bathroom_count: rand(1..5),
@@ -104,6 +125,20 @@ ACCOMMODATION_TITLES.each do |title|
     description: Faker::Lorem.paragraph,
     user: User.all.sample
   )
+
+  # attach image to active storage
+  i = rand(0...accommodation_photo_list.length)
+  photos = accommodation_photo_list[i]
+  photos.each_with_index do |photo, j|
+    photo_name = "photo_#{i}_#{j}.jpg"
+    puts "uploading \"#{photo_name}\""
+    accommodation.photos.attach(
+      io: photo,
+      filename: photo_name,
+      content_type: "image/png"
+    )
+  end
+  accommodation.save!
 end
 
 puts "Created #{Accommodation.all.length} accommodation"
