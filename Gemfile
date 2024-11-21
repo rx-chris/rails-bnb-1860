@@ -78,3 +78,5 @@ gem "devise"
 gem "faker", "~> 3.5"
 
 gem "cloudinary"
+
+gem "geocoder"

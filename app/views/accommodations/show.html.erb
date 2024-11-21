@@ -49,13 +49,18 @@
 
       <hr>
 
-      <div class="d-flex flex-row">
+      <div class="d-flex">
         <div class="row">
-          <div class="col-6">
-            <p>Link to host's profile</p>
+          <div class="col-2">
+            <a href="url">Host's avatar</a>
           </div>
-          <div class="col-6">
+
+          <div class="col-8">
             <p>Hosted by <%= @accommodation.host_name %></p>
+            <div class="d-flex justify-content-between">
+              <p>Superhost</p> |
+              <p>1 year hosting</p>
+            </div>
           </div>
         </div>
       </div>
