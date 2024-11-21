@@ -136,7 +136,45 @@
 
       <div>
         <h2>Meet your host</h2>
-        <%= @accommodation.host_name %>
+          <div class="row">
+            <div class="col-6">
+              <div class="bg-white rounded shadow p-3 mb-3">
+                <div class="d-flex justify-content-between">
+                  <div class="col-6">
+                    <p>Host's brand image</p>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="border-bottom">
+                      <p>10,000+</p>
+                      <p>reviews</p>
+                    </div>
+                    <div class="border-bottom">
+                      <p>4.75</p>
+                      <p>ratings</p>
+                    </div>
+                    <div>
+                      <p>6 years</p>
+                      <p>hosting</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <p>Speaks Chinese, English and Malay</p>
+              <p>Lives in <%= @accommodation.city %>, <%= @accommodation.country %></p>
+              <p>Hello Guests! We are a group of enthusiastic and open-minded peers who love to explore, <a href="#">show more</a></p>
+            </div>
+
+            <div class="col-6">
+              <h3>Host details</h3>
+              <p>Response rate: 100%</p>
+              <p>Responds within an hour</p>
+              <a class="btn btn-primary" href="#" role="button">Link</a>
+            </div>
+
+          </div>
       </div>
 
       <hr>
