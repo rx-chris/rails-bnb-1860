@@ -9,4 +9,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true
+
+  def display_name
+    "#{first_name.capitalize} #{last_name.capitalize}"
+  end
 end

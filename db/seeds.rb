@@ -26,9 +26,12 @@ USERNAMES = [
 PASSWORD = "password1860"
 
 USERNAMES.each do |username|
+  first_name, last_name = username.split("_")
   User.create!(
     email: "#{username}@gmail.com",
-    password: PASSWORD
+    password: PASSWORD,
+    first_name:,
+    last_name:
   )
 end
 
@@ -92,9 +95,13 @@ ACCOMMODATION_TITLES.each do |title|
     price: rand(100..500),
     rating: rand(0..5),
     address: Faker::Address.full_address,
-    bed_count: rand(0..5),
-    bedroom_count: rand(0..5),
-    bathroom_count: rand(0..5),
+    bed_count: rand(1..5),
+    bedroom_count: rand(1..5),
+    bathroom_count: rand(1..5),
+    city: Faker::Address.city,
+    country: Faker::Address.country,
+    max_guest_count: rand(1..7),
+    description: Faker::Lorem.paragraph,
     user: User.all.sample
   )
 end
