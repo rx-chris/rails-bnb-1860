@@ -2,7 +2,7 @@ class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :accommodation
 
-  STATUSES = ["Pending", "Accepted", "Declined"]
+  STATUSES = ["Pending", "Accepted", "Declined"].freeze
 
   validates :start_date, presence: true
   validates :end_date, presence: true

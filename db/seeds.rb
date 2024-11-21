@@ -35,7 +35,7 @@ end
 puts "Created #{User.all.length} users"
 
 # create amenities
-Amenity::NAMES.each do |name|
+["Wi-Fi", "Air Conditioning", "Heating", "Kitchen", "Free Parking", "Towels", "Bed Linens", "Soap", "Toilet Paper", "Television", "Washer", "Dryer", "Hair Dryer", "Iron", "Coffee Maker", "Tea Kettle", "Smoke Alarm", "Carbon Monoxide Detector", "First Aid Kit", "Fire Extinguisher"].each do |name|
   Amenity.create!(name: name)
 end
 

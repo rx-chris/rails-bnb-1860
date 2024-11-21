@@ -4,6 +4,8 @@ class Accommodation < ApplicationRecord
   has_many :accommodation_amenities, dependent: :destroy
   has_many :amenities, through: :accommodation_amenities
   belongs_to :user
+  has_many :accommodation_amenities
+  has_many :amenities, through: :accommodation_amenities
 
   TYPES_OF_PLACE = ["Room", "Entire home"]
 
@@ -11,7 +13,7 @@ class Accommodation < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :price, presence: true
   validates :address, presence: true
-  validates :bed_count, presence: true
-  validates :bedroom_count, presence: true
-  validates :bathroom_count, presence: true
+  validates :bed_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :bedroom_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :bathroom_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end
