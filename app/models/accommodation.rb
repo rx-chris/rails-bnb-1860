@@ -15,6 +15,9 @@ class Accommodation < ApplicationRecord
   validates :bedroom_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :bathroom_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
   def host_name
     user.display_name
   end
