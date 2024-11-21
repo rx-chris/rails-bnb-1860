@@ -3,6 +3,8 @@ class AccommodationsController < ApplicationController
 
   def show
     @accommodation = Accommodation.find(params[:id])
+  end
+
   def new
     @accommodation = Accommodation.new
   end
