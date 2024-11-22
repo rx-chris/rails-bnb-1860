@@ -24,11 +24,11 @@
         Guest
       </a>
 
-      <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuLink">
+      <ul class="dropdown-menu w-100 p-3" aria-labelledby="dropdownMenuLink">
         <li><a class="dropdown-item" href="#"></a>
           <div class="d-flex justify-content-between">
             <div>
-              <h2>Adults</h2>
+              <h2 class="fs-4">Adults</h2>
               <p>Age 13+</p>
             </div>
             <div class="d-flex justify-content-end align-items-center">
@@ -54,12 +54,24 @@
         <li>
           <div class="d-flex justify-content-between">
             <div>
-              <h2>Childrens</h2>
+              <h2 class="fs-4">Childrens</h2>
               <p>Age 2-12</p>
             </div>
             <div class="d-flex justify-content-center align-items-center">
               <a href="" class="btn-counter">-</a>
-              <input disabled type="text" class="counter text-align-center" value="0">
+              <%# <input disabled type="text" class="counter text-align-center" value="0"> %>
+              <%= f.input :no_of_childs,
+                input_html: {
+                  type:"text",
+                  disabled: true,
+                  value: 0,
+                  class:"counter text-align-center"
+                },
+                label: false,
+                wrapper_html: {
+                  class: "counter-wrapper"
+                }
+                %>
               <a href="" class="btn-counter">+</a>
             </div>
           </div>
@@ -67,12 +79,22 @@
         <li>
           <div class="d-flex justify-content-between">
             <div>
-              <h2>Infants</h2>
+              <h2 class="fs-4">Infants</h2>
               <p>Under 2</p>
             </div>
             <div class="d-flex justify-content-center align-items-center">
               <a href="" class="btn-counter">-</a>
-              <input disabled type="text" class="counter text-align-center" value="0">
+              <%= f.input :no_of_infants,
+                input_html: {
+                  type:"text",
+                  disabled: true,
+                  value: 0,
+                  class:"counter text-align-center"
+                },
+                label: false,
+                wrapper_html: {
+                  class: "counter-wrapper"
+                } %>
               <a href="" class="btn-counter">+</a>
             </div>
           </div>
@@ -80,12 +102,22 @@
         <li>
          <div class="d-flex justify-content-between">
             <div>
-              <h2>Pets</h2>
+              <h2 class="fs-4">Pets</h2>
               <p>Bringing a service animal?</p>
             </div>
             <div class="d-flex justify-content-center align-items-center">
               <a href="" class="btn-counter">-</a>
-              <input disabled type="text" class="counter text-align-center" value="0">
+              <%= f.input :no_of_pets,
+                input_html: {
+                  type:"text",
+                  disabled: true,
+                  value: 0,
+                  class:"counter text-align-center"
+                },
+                label: false,
+                wrapper_html: {
+                  class: "counter-wrapper"
+                } %>
               <a href="" class="btn-counter">+</a>
             </div>
           </div>
