@@ -161,7 +161,7 @@ accommodations = Accommodation.all
   # users to prevent them from booking their own accommodations
   # we don't advocate money laundering
   accommodation = accommodations.sample
-  users = User.all.delete(accommodation.user)
+  users = User.all.to_a - [accommodation.user]
 
   Booking.create!(
     start_date: start_date,
