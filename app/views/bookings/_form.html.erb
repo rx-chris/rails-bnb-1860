@@ -1,14 +1,19 @@
+<%= simple_form_for([@accommodation, @booking]) do |f| %>
+
  <div class="bg-white rounded shadow p-3">
   <h2>$62 SGD night</h2>
   <div class="d-flex justify-content-between p-3 border rounded">
     <div>
       <p>Check-in</p>
-      <input type="text" data-controller="datepicker" class="w-100">
+      <%# <input type="text" data-controller="datepicker" class="w-100"> %>
+      <%= f.input :start_date, as: :string, input_html: {data: { controller: "datepicker"}} %>
     </div>
 
     <div>
       <p>Check-out</p>
-      <input type="text" data-controller="datepicker" class="w-100">
+      <%# <input type="text" data-controller="datepicker" class="w-100"> %>
+      <%= f.input :end_date, as: :string, input_html: {data: { controller: "datepicker"}} %>
+    </div>
     </div>
 
   </div>
@@ -16,20 +21,82 @@
   <div class="d-flex p-3 border rounded">
     <div class="dropdown">
       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown link
+        Guest
       </a>
 
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="#">Adults</a></li>
-        <li><a class="dropdown-item" href="#">Children</a></li>
-        <li><a class="dropdown-item" href="#">Infants</a></li>
-        <li><a class="dropdown-item" href="#">Pets</a></li>
+      <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="#"></a>
+          <div class="d-flex justify-content-between">
+            <div>
+              <h2>Adults</h2>
+              <p>Age 13+</p>
+            </div>
+            <div class="d-flex justify-content-end align-items-center">
+              <a href="" class="btn-counter">-</a>
+              <%# <input disabled type="text" class="counter text-align-center" value="0"> %>
+              <%= f.input :no_of_adults,
+                input_html: {
+                  type:"text",
+                  disabled: true,
+                  value: 0,
+                  class:"counter text-align-center"
+                },
+                label: false,
+                wrapper_html: {
+                  class: "counter-wrapper"
+                }
+                %>
+              <a href="" class="btn-counter">+</a>
+            </div>
+          </div>
+
+        </li>
+        <li>
+          <div class="d-flex justify-content-between">
+            <div>
+              <h2>Childrens</h2>
+              <p>Age 2-12</p>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="" class="btn-counter">-</a>
+              <input disabled type="text" class="counter text-align-center" value="0">
+              <a href="" class="btn-counter">+</a>
+            </div>
+          </div>
+          </li>
+        <li>
+          <div class="d-flex justify-content-between">
+            <div>
+              <h2>Infants</h2>
+              <p>Under 2</p>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="" class="btn-counter">-</a>
+              <input disabled type="text" class="counter text-align-center" value="0">
+              <a href="" class="btn-counter">+</a>
+            </div>
+          </div>
+          </li>
+        <li>
+         <div class="d-flex justify-content-between">
+            <div>
+              <h2>Pets</h2>
+              <p>Bringing a service animal?</p>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="" class="btn-counter">-</a>
+              <input disabled type="text" class="counter text-align-center" value="0">
+              <a href="" class="btn-counter">+</a>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
 
   <div class="d-grid mx-auto p-3">
-    <button class="btn btn-border-radius btn-primary" type="button">Reserve</button>
+    <%# <button class="btn btn-border-radius btn-primary" type="button">Reserve</button> %>
+    <%= f.submit %>
   </div>
 
   <p class="text-center p-3">You won't be charged yet</p>
@@ -58,3 +125,4 @@
   </div>
 
 </div>
+ <% end %>
