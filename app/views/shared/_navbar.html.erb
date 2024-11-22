@@ -1,38 +1,109 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
+<div class="position-relative">
+  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon border-bottom">
+    <div class="container-fluid">
+      <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+        <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "rounded-circle" %>
+        <h1 class="fs-4 m-2 text-red">railsbnb</h1>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto align-items-center">
           <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
+            <%=
+            link_to "Railsbnb your home", "#", class:"border rounded-pill p-1 text-decoration-none p-2"
+          %>
+          </li>
+          <li class="nav-item d-flex justify-content-center align-items-center px-3 border rounded-circle mx-2 size-10">
+            <%= link_to  "#" do %>
+              <i class="fa-solid fa-globe"></i>
+            <% end %>
           </li>
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
+            <a href="#" class="d-flex align-items-center border rounded-pill p-1 text-decoration-none" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-bars me-2 ms-3"></i>
+              <% if user_signed_in? %>
+                <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+              <% else %>
+                <span class="size-10 d-flex align-items-center justify-content-center rounded-circle bg-dark">
+                  <i class="fa-solid fa-user text-white"></i>
+                </span>
+              <% end %>
+            </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <% if user_signed_in? %>
+                <%= link_to "Messages", "#", class: "dropdown-item" %>
+                <%= link_to "Notifications", "#", class: "dropdown-item" %>
+                <%= link_to "Trips", "#", class: "dropdown-item" %>
+                <%= link_to "Wishlists", "#", class: "dropdown-item" %>
+                <hr />
+                <%= link_to "Railsbnb your home", "#", class: "dropdown-item" %>
+                <%= link_to "Host an experience", "#", class: "dropdown-item" %>
+                <%= link_to "Account", "#", class: "dropdown-item" %>
+                <hr />
+              <% end %>
+              <% unless user_signed_in? %>
+                <%= link_to "Login", new_user_session_path, class: "dropdown-item" %>
+                <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
+              <% end %>
+              <%= link_to "Help Center", "#", class: "dropdown-item" %>
+              <% if user_signed_in? %>
+                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <% end %>
             </div>
           </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+        </ul>
+      </div>
     </div>
   </div>
+  <%# collapsed search bar %>
+  <div class="position-absolute top-0 start-50 translate-middle-x d-flex p-2 border rounded-pill mt-2 shadow-sm">
+    <button class="btn px-2 py-0">Anywhere</button>
+    <button class="btn px-2 py-0 border-start border-end">Any week</button>
+    <button class="btn px-2 py-0 d-flex align-items-center">
+      <div class="me-2">Add guests</div>
+      <div class="d-flex align-items-center justify-content-center bg-danger rounded-circle size-7">
+        <i class="fa-solid fa-magnifying-glass text-white"></i>
+      </div>
+    </button>
+  </div>
+  <%# expanded search bar %>
+  <form class="interactive-search-bar position-absolute top-0 start-50 translate-middle-x z-3 d-none">
+    <div class="d-flex align-items-center justify-content-center mt-1">
+      <button class="btn" >Stays</button>
+      <button class="btn" >Experience</button>
+    </div>
+    <div class="btn-group bg-secondary-subtle rounded-pill shadow border my-2">
+      <input type="radio" class="btn-check" name="interactive-search" id="search-destination" checked>
+      <label for="search-destination" class="btn rounded-pill">
+        <div>Where</div>
+        <div>Seach destinations</div>
+      </label>
+      <input type="radio" class="btn-check" name="interactive-search" id="search-check-in">
+      <label for="search-check-in" class="btn border-right border-left rounded-pill" >
+        <div>Check in</div>
+        <div>Add dates</div>
+      </label>
+      <input type="radio" class="btn-check" name="interactive-search" id="search-check-out">
+      <label for="search-check-out" class="btn rounded-pill" >
+        <div>Check out</div>
+        <div>Add dates</div>
+      </label>
+      <input type="radio" class="btn-check" name="interactive-search" id="search-guests">
+      <label for="search-guests" class="btn rounded-pill d-flex">
+        <div>
+          <div>Who</div>
+          <div>Add guests</div>
+        </div>
+        <button class="btn py-0 bg-danger-subtle rounded-pill d-flex align-items-center justify-content-center">
+          <i class="fa-solid fa-magnifying-glass text-white pe-2"></i>
+          <div>Search</div>
+        </button>
+      </label>
+    </div>
+    <div class="position-absolute w-100 bg-light shadow rounded-5" style="height: 400px;">
+      <%# popover content %>
+    </div>
+  </form>
 </div>
