@@ -8,6 +8,10 @@
 
         <%= simple_form_for(@accommodation) do |f| %>
           <%= f.input :type_of_place %>
+          <%= f.input :city %>
+          <%= f.input :country, as: :string %>
+          <%= f.input :max_guest_count %>
+          <%= f.input :description %>
           <%= f.input :title %>
           <%= f.input :price %>
           <%= f.input :address %>

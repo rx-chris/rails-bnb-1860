@@ -80,3 +80,5 @@ gem "faker", "~> 3.5"
 gem "cloudinary"
 
 gem "geocoder"
+
+gem 'country_select'
