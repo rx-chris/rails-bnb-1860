@@ -38,11 +38,15 @@
       <div>
         <h2><%=  @accommodation.type_of_place %> in <%= @accommodation.city %>, <%= @accommodation.country%></h2>
         <div class="d-flex justify-content-between">
-            <%= @accommodation.max_guest_count %> guests
-            <%= @accommodation.bedroom_count %> bedrooms
-            <%= @accommodation.bathroom_count %> bathrooms
-            Rating: <%= @accommodation.rating %> stars
-            <%= @accommodation.bed_count %> beds
+          <%= @accommodation.max_guest_count %> guests
+          <%= @accommodation.bedroom_count %> bedrooms
+          <%= @accommodation.bed_count %> beds
+          <%= @accommodation.bathroom_count %> bathrooms
+        </div>
+        <div class="d-flex">
+          <%= @accommodation.rating %> stars
+          <a href="#"><%= @accommodation.reviews.length %> reviews</a>
+
         </div>
       </div>
 
@@ -55,7 +59,7 @@
           </div>
 
           <div class="col-8">
-            <p>Hosted by <%= @accommodation.host_name %></p>
+            <h4>Hosted by <%= @accommodation.host_name %></h4>
             <div class="d-flex justify-content-between">
               <p>Superhost</p> |
               <p>1 year hosting</p>
@@ -85,13 +89,18 @@
 
       <div>
         <h2>Where you'll sleep</h2>
+          <%= image_tag "bedroom.webp", alt: "", class: 'w-50 mb-3' %>
+          <h4>Bedroom</h4>
+          <p>1 queen bed</p>
+
+
       </div>
 
       <hr>
 
       <div>
         <h2>What this place offers</h2>
-        <ul>
+        <ul class="list-unstyled">
           <% @accommodation.amenities.each do |amenity| %>
             <li><%= amenity.name %></li>
           <% end %>
@@ -108,8 +117,7 @@
       <hr>
 
       <div>
-        <h2><%= @accommodation.rating %> stars</h2>
-
+        <h2><%= @accommodation.rating %> stars • <%= @accommodation.reviews.count %> reviews</h2>
       </div>
 
       <hr>
@@ -118,7 +126,9 @@
 
       <div class="list-group d-flex flex-row flex-wrap">
         <ul>
-          
+          <% @accommodation.reviews.each do |review| %>
+            <li><%= @review.content %></li>
+          <% end %>
         </ul>
         <a class="btn btn-primary" href="#" role="button">Show more reviews</a>
       </div>
@@ -181,29 +191,30 @@
         <h2>Things to know</h2>
           <div class="col-4">
             <h3>House rules</h3>
-              <ul>
+              <ul class="list-unstyled">
                 <li>Check-in after 3:00pm</li>
                 <li>Check-out before 11:00am</li>
                 <li>4 guests maximum</li>
               </ul>
+              <a href="#">Show more</a></p>
           </div>
 
           <div class="col-4">
             <h3>Safety and property</h3>
-              <ul>
-                <li>Check-in after 3:00pm</li>
-                <li>Check-out before 11:00am</li>
-                <li>4 guests maximum</li>
+              <ul class="list-unstyled">
+                <li>No smoke alarm</li>
+                <li>Carbon monoxide detector not required</li>
               </ul>
+              <a href="#">Show more</a></p>
           </div>
 
           <div class="col-4">
             <h3>Cancellation policy</h3>
-              <ul>
-                <li>Check-in after 3:00pm</li>
-                <li>Check-out before 11:00am</li>
-                <li>4 guests maximum</li>
+              <ul class="list-unstyled">
+                <li>Free cancellation before 6 Dec. Cancel before check-in on 7 Dec for a partial refund.</li>
+                <li>Review this Host’s full policy for details.</li>
               </ul>
+              <a href="#">Show more</a></p>
           </div>
 
       </div>
