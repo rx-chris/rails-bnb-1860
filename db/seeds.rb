@@ -1,9 +1,33 @@
 require 'faker'
+require 'open-uri'
+
+# toggle this enable/disable image seeding
+seed_images = true
+
+# download images
+images_dir = "#{Rails.root}/app/assets/images/accommodations"
+accommodation_photo_list = []
+
+if (seed_images)
+  Dir.entries(images_dir).first(5).each do |filename|
+    next if filename == '.' or filename == '..'
+    full_path = "#{images_dir}/#{filename}"
+
+    File.open(full_path, 'r') do |file|
+      image_urls = JSON.parse(file.read) # array of 5 image URLs
+      images = image_urls.map do |image_url|
+        puts "parsing #{image_url}"
+        URI.parse(image_url).open
+      end
+      accommodation_photo_list.push(images)
+    end
+  end
+end
 
 # clear all tables
+Review.destroy_all # moved review up to destroy before booking
 User.destroy_all
 Amenity.destroy_all
-Review.destroy_all # moved review up to destroy before booking
 Booking.destroy_all
 Accommodation.destroy_all
 AccommodationAmenity.destroy_all
@@ -25,7 +49,7 @@ USERNAMES = [
 ]
 PASSWORD = "password1860"
 
-USERNAMES.each do |username|
+USERNAMES.first(3).each do |username|
   first_name, last_name = username.split("_")
   User.create!(
     email: "#{username}@gmail.com",
@@ -88,13 +112,14 @@ ACCOMMODATION_TITLES = [
   'The Lush Escap'
 ]
 
-ACCOMMODATION_TITLES.each do |title|
-  Accommodation.create!(
+ACCOMMODATION_TITLES.first(5).each do |title|
+  accommodation = Accommodation.new(
     type_of_place: Accommodation::TYPES_OF_PLACE.sample,
     title: title,
     price: rand(100..500),
     rating: rand(0..5),
     address: Faker::Address.full_address,
+
     bed_count: rand(1..5),
     bedroom_count: rand(1..5),
     bathroom_count: rand(1..5),
@@ -104,6 +129,23 @@ ACCOMMODATION_TITLES.each do |title|
     description: Faker::Lorem.paragraph,
     user: User.all.sample
   )
+
+  if(seed_images)
+    # attach image to active storage
+    i = rand(0...accommodation_photo_list.length)
+    photos = accommodation_photo_list[i]
+    photos.each_with_index do |photo, j|
+      photo_name = "photo_#{i}_#{j}.jpg"
+      puts "uploading \"#{photo_name}\""
+      accommodation.photos.attach(
+        io: photo,
+        filename: photo_name,
+        content_type: "image/png"
+      )
+    end
+
+  end
+  accommodation.save!
 end
 
 puts "Created #{Accommodation.all.length} accommodation"
@@ -125,7 +167,7 @@ end
 puts "Created #{Booking.all.length} bookings"
 
 # create accommodation amenities
-120.times do |i|
+(Accommodation.all.length * 5).times do |i|
   accommodation = Accommodation.all.sample
   filtered_amenities = Amenity.all.reject do |amenity|
     accommodation.amenities.find { |accom_amenity| accom_amenity.id == amenity.id }

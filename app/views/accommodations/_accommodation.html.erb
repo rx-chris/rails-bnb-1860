@@ -1,0 +1,34 @@
+<%# locals: (accommodation:) %>
+<li class="card shadow p-3 rounded-4">
+  <div class="position-relative">
+    <div id="<%= accommodation.id %>" class="carousel slide">
+      <div class="carousel-inner rounded-3">
+        <% accommodation.photos.each_with_index do |photo, i| %>
+          <div class="carousel-item <%= i == 0 ? 'active' : '' %>">
+            <%= cl_image_tag photo.key, class:'card-img object-fit-cover', style: 'height: 200px;' %>
+          </div>
+        <% end %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#<%= accommodation.id %>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#<%= accommodation.id %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <%# favourite button %>
+    <i class="fa-solid fa-heart position-absolute top-0 end-0 mt-2 me-2"></i>
+    <%# guest favourite %>
+    <div class="badge rounded-pill text-bg-light position-absolute top-0 start-0 mt-2 ms-2">
+      Guest Favourite
+    </div>
+  </div>
+  <div class="d-flex align-items-center mt-2">
+    <%= link_to accommodation.title, accommodation_path(accommodation), class: 'flex-grow-1' %>
+    <i class="fa-solid fa-star me-2"></i>
+    <div><%= accommodation.rating %></div>
+  </div>
+  <p><strong>$<%= accommodation.price %> SGD</strong> night</p>
+</li>
