@@ -1,4 +1,3 @@
 class Review < ApplicationRecord
-  belongs_to :accommodation
-  belongs_to :user
+  belongs_to :booking
 end
