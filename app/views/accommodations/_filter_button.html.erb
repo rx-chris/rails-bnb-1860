@@ -1,0 +1,80 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-secondary d-flex align-items-center rounded-3" data-bs-toggle="modal" data-bs-target="#filter">
+  <i class="fa-solid fa-sliders me-2"></i>
+  <span>Filter</span>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="filter" tabindex="-1" aria-labelledby="filter" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded-4">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 flex-grow-1 text-center" id="filter">Filter</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="get">
+          <%# Type of place %>
+          <div>
+            <h2>Type of place</h2>
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="btn-group" role="group" aria-label="type-of-place">
+                <input type="radio" class="btn-check" name="type-of-place" id="any-type" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="any-type">Any Type</label>
+                <input type="radio" class="btn-check" name="type-of-place" id="room" autocomplete="off">
+                <label class="btn btn-outline-primary" for="room">Room</label>
+                <input type="radio" class="btn-check" name="type-of-place" id="entire-home" autocomplete="off">
+                <label class="btn btn-outline-primary" for="entire-home">Entire Home</label>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <%# Price Range %>
+          <div>
+            <h2>Price Range</h2>
+            <p>Nightly prices before fees and taxes</p>
+            <div class="d-flex">
+              <input type="range" class="w-100">
+              <input type="range" class="w-100">
+            </div>
+          </div>
+          <hr>
+          <%# Rooms and Beds %>
+          <div>
+            <h2>Rooms and beds</h2>
+            <div class="d-flex align-items-center">
+              <div class="flex-grow-1">Bedrooms</div>
+              <button>-</button>
+              <div>Any</div>
+              <button>+</button>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="flex-grow-1">Beds</div>
+              <button>-</button>
+              <div>Any</div>
+              <button>+</button>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="flex-grow-1">Bathrooms</div>
+              <button>-</button>
+              <div>Any</div>
+              <button>+</button>
+            </div>
+          </div>
+          <hr>
+          <%# Amenities %>
+          <div>
+            <h2>Amenities</h2>
+            <% @amenities.each do|amenity| %>
+              <button class="btn btn-outline-secondary rounded-3"><%= amenity.name%></button>
+            <% end %>
+          </div>
+        </div>
+        <%# modal footer %>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
