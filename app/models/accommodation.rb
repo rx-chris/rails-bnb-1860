@@ -4,6 +4,7 @@ class Accommodation < ApplicationRecord
   has_many :amenities, through: :accommodation_amenities
   has_many :reviews, through: :bookings
   has_many_attached :photos
+
   belongs_to :user
 
   TYPES_OF_PLACE = ["Room", "Entire home"]
@@ -25,5 +26,9 @@ class Accommodation < ApplicationRecord
 
   def host_name
     user.display_name
+  end
+
+  def cl_image?(index)
+    photos[index].present? && photos[index].key?
   end
 end

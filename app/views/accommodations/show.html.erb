@@ -8,24 +8,46 @@
   </div>
 
   <div class="d-flex">
-      <%= image_tag "pic1.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+    <% if @accommodation.cl_image?(0) %>
+      <%= cl_image_tag @accommodation.photos[0].key, alt: "", class: 'w-50 object-fit-cover' %>
+    <% else %>
+      <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+    <% end %>
 
     <div class="w-50">
       <div class="row">
         <div class="col-6">
-          <%= image_tag "pic2.jpg", alt: "", class: 'd-block w-100 h-100' %>
+          <% if @accommodation.cl_image?(1) %>
+            <%= cl_image_tag @accommodation.photos[1].key, alt: "", class: 'w-50 object-fit-cover' %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+          <% end %>
         </div>
+
         <div class="col-6">
-          <%= image_tag "pic3.jpg", alt: "", class: 'd-block w-100 h-100' %>
+          <% if @accommodation.cl_image?(2) %>
+            <%= cl_image_tag @accommodation.photos[2].key, alt: "", class: 'w-50 object-fit-cover' %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+          <% end %>
         </div>
       </div>
 
       <div class="row">
         <div class="col-6">
-          <%= image_tag "pic4.jpg", alt: "", class: 'd-block w-100 h-100' %>
+          <% if @accommodation.cl_image?(3) %>
+            <%= cl_image_tag @accommodation.photos[3].key, alt: "", class: 'w-50 object-fit-cover' %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+          <% end %>
         </div>
+
         <div class="col-6">
-          <%= image_tag "pic5.jpg", alt: "", class: 'd-block w-100 h-100' %>
+          <% if @accommodation.cl_image?(4) %>
+            <%= cl_image_tag @accommodation.photos[4].key, alt: "", class: 'w-50 object-fit-cover' %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -127,7 +149,7 @@
       <div class="list-group d-flex flex-row flex-wrap">
         <ul>
           <% @accommodation.reviews.each do |review| %>
-            <li><%= @review.content %></li>
+            <li><%= review.content %></li>
           <% end %>
         </ul>
         <a class="btn btn-primary" href="#" role="button">Show more reviews</a>
