@@ -2,26 +2,24 @@
 
  <div class="bg-white rounded shadow p-3">
   <h2>$62 SGD night</h2>
-  <div class="d-flex justify-content-between p-3 border rounded">
+  <div class="d-flex justify-content-between border rounded">
     <div>
-      <p>Check-in</p>
       <%# <input type="text" data-controller="datepicker" class="w-100"> %>
-      <%= f.input :start_date, as: :string, input_html: {data: { controller: "datepicker"}} %>
+      <%= f.input :start_date, as: :string, wrapper: false, input_html: {data: { controller: "datepicker"}}, label: 'Check-in' %>
     </div>
 
     <div>
-      <p>Check-out</p>
       <%# <input type="text" data-controller="datepicker" class="w-100"> %>
-      <%= f.input :end_date, as: :string, input_html: {data: { controller: "datepicker"}} %>
+      <%= f.input :end_date, as: :string, wrapper: false, input_html: {data: { controller: "datepicker"}}, label: 'Checkout' %>
     </div>
     </div>
 
-  </div>
 
-  <div class="d-flex p-3 border rounded">
-    <div class="dropdown">
+
+  <div class="border rounded">
+    <div class="dropdown" data-controller="head-counter">
       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        Guest
+        Guests
       </a>
 
       <ul class="dropdown-menu w-100 p-3" aria-labelledby="dropdownMenuLink">
@@ -31,22 +29,23 @@
               <h2 class="fs-4">Adults</h2>
               <p>Age 13+</p>
             </div>
-            <div class="d-flex justify-content-end align-items-center">
-              <a href="" class="btn-counter">-</a>
+            <div class="d-flex justify-content-end align-items-center" data-controller="counter">
+              <a class="btn-counter" data-action="click->counter#decrement">-</a>
               <%# <input disabled type="text" class="counter text-align-center" value="0"> %>
               <%= f.input :no_of_adults,
                 input_html: {
                   type:"text",
                   disabled: true,
                   value: 0,
-                  class:"counter text-align-center"
+                  class:"counter text-align-center",
+                  data: { counter_target: "total"}
                 },
                 label: false,
                 wrapper_html: {
                   class: "counter-wrapper"
                 }
                 %>
-              <a href="" class="btn-counter">+</a>
+              <a class="btn-counter" data-action="click->counter#increment">+</a>
             </div>
           </div>
 
@@ -57,22 +56,23 @@
               <h2 class="fs-4">Childrens</h2>
               <p>Age 2-12</p>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
-              <a href="" class="btn-counter">-</a>
+            <div class="d-flex justify-content-center align-items-center" data-controller="counter">
+              <a class="btn-counter" data-action="click->counter#decrement">-</a>
               <%# <input disabled type="text" class="counter text-align-center" value="0"> %>
               <%= f.input :no_of_childs,
                 input_html: {
                   type:"text",
                   disabled: true,
                   value: 0,
-                  class:"counter text-align-center"
+                  class:"counter text-align-center",
+                  data: { counter_target: "total"}
                 },
                 label: false,
                 wrapper_html: {
                   class: "counter-wrapper"
                 }
                 %>
-              <a href="" class="btn-counter">+</a>
+              <a class="btn-counter" data-action="click->counter#increment">+</a>
             </div>
           </div>
           </li>
@@ -82,20 +82,21 @@
               <h2 class="fs-4">Infants</h2>
               <p>Under 2</p>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
-              <a href="" class="btn-counter">-</a>
+            <div class="d-flex justify-content-center align-items-center" data-controller="counter">
+              <a class="btn-counter" data-action="click->counter#decrement">-</a>
               <%= f.input :no_of_infants,
                 input_html: {
                   type:"text",
                   disabled: true,
                   value: 0,
-                  class:"counter text-align-center"
+                  class:"counter text-align-center",
+                  data: { counter_target: "total"}
                 },
                 label: false,
                 wrapper_html: {
                   class: "counter-wrapper"
                 } %>
-              <a href="" class="btn-counter">+</a>
+              <a class="btn-counter" data-action="click->counter#increment">+</a>
             </div>
           </div>
           </li>
@@ -105,20 +106,21 @@
               <h2 class="fs-4">Pets</h2>
               <p>Bringing a service animal?</p>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
-              <a href="" class="btn-counter">-</a>
+            <div class="d-flex justify-content-center align-items-center" data-controller="counter">
+              <a class="btn-counter" data-action="click->counter#decrement">-</a>
               <%= f.input :no_of_pets,
                 input_html: {
                   type:"text",
                   disabled: true,
                   value: 0,
-                  class:"counter text-align-center"
+                  class:"counter text-align-center",
+                  data: { counter_target: "total"}
                 },
                 label: false,
                 wrapper_html: {
                   class: "counter-wrapper"
                 } %>
-              <a href="" class="btn-counter">+</a>
+              <a class="btn-counter" data-action="click->counter#increment">+</a>
             </div>
           </div>
         </li>
@@ -156,5 +158,6 @@
     <p>$383 SGD</p>
   </div>
 
+  </div>
 </div>
  <% end %>
