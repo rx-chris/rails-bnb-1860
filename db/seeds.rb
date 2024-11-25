@@ -166,7 +166,10 @@ accommodations = Accommodation.all
   Booking.create!(
     start_date: start_date,
     end_date: end_date,
-    guest_count: rand(1..7),
+    no_of_adults: rand(1..7),
+    no_of_infants: rand(1..7),
+    no_of_childs: rand(1..7),
+    no_of_pets: rand(1..7),
     status: Booking::STATUSES.sample,
     user: users.sample,
     accommodation: accommodation
