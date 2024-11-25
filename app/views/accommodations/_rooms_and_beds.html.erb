@@ -1,0 +1,9 @@
+<div class="rooms-and-beds d-flex align-items-center" data-controller="counter">
+  <div class="flex-grow-1"><%= title %></div>
+  <button type="button" data-action="counter#decrement">-</button>
+  <label data-counter-target="label" for="<%= key %>">
+    Any
+  </label>
+  <input data-counter-target="input" type="number" id="<%= key %>" name="<%= key %>" value="0" class="d-none"/>
+  <button type="button" data-action="counter#increment">+</button>
+</div>

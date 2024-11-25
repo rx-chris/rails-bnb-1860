@@ -33,6 +33,4 @@ class Accommodation < ApplicationRecord
   def cl_image?(index)
     photos[index].present? && photos[index].key?
   end
-
-
 end
