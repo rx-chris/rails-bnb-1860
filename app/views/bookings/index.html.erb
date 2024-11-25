@@ -1,6 +1,13 @@
 <div class="container">
   <h1>All bookings</h1>
 
+  <div class="d-flex gap-3">
+    <a href="url">My apartments</a>
+    <a href="url">My bookings</a>
+
+  </div>
+
+  <hr>
 
 
   <div class="div">
@@ -17,7 +24,7 @@
           <p><strong><%= booking.accommodation.title %></strong>  </p>
           <p>Owned by: <%= booking.accommodation.host_name %></p>
           <p><%= booking.start_date %> to <%= booking.end_date %></p>
-          <div class="d-flex">
+          <div class="d-flex gap-3">
             <%= link_to('Accept', accept_booking_path(booking)) %>
             <%= link_to('Declined', decline_booking_path(booking)) %>
           </div>
