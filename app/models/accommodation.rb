@@ -3,6 +3,8 @@ class Accommodation < ApplicationRecord
   has_many :accommodation_amenities, dependent: :destroy
   has_many :amenities, through: :accommodation_amenities
   has_many :reviews, through: :bookings
+  has_many_attached :photos
+
   belongs_to :user
 
   TYPES_OF_PLACE = ["Room", "Entire home"]
@@ -19,7 +21,14 @@ class Accommodation < ApplicationRecord
   validates :description, presence: true
   validates :max_guest_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
   def host_name
     user.display_name
+  end
+
+  def cl_image?(index)
+    photos[index].present? && photos[index].key?
   end
 end

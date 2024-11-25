@@ -8,24 +8,46 @@
   </div>
 
   <div class="d-flex">
-      <%= image_tag "pic1.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+    <% if @accommodation.cl_image?(0) %>
+      <%= cl_image_tag @accommodation.photos[0].key, alt: "", class: 'w-50 object-fit-cover' %>
+    <% else %>
+      <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+    <% end %>
 
     <div class="w-50">
       <div class="row">
         <div class="col-6">
-          <%= image_tag "pic2.jpg", alt: "", class: 'd-block w-100 h-100' %>
+          <% if @accommodation.cl_image?(1) %>
+            <%= cl_image_tag @accommodation.photos[1].key, alt: "", class: 'w-50 object-fit-cover' %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+          <% end %>
         </div>
+
         <div class="col-6">
-          <%= image_tag "pic3.jpg", alt: "", class: 'd-block w-100 h-100' %>
+          <% if @accommodation.cl_image?(2) %>
+            <%= cl_image_tag @accommodation.photos[2].key, alt: "", class: 'w-50 object-fit-cover' %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+          <% end %>
         </div>
       </div>
 
       <div class="row">
         <div class="col-6">
-          <%= image_tag "pic4.jpg", alt: "", class: 'd-block w-100 h-100' %>
+          <% if @accommodation.cl_image?(3) %>
+            <%= cl_image_tag @accommodation.photos[3].key, alt: "", class: 'w-50 object-fit-cover' %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+          <% end %>
         </div>
+
         <div class="col-6">
-          <%= image_tag "pic5.jpg", alt: "", class: 'd-block w-100 h-100' %>
+          <% if @accommodation.cl_image?(4) %>
+            <%= cl_image_tag @accommodation.photos[4].key, alt: "", class: 'w-50 object-fit-cover' %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "", class: 'w-50 object-fit-cover' %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -36,25 +58,34 @@
   <div class="row">
     <div class="col-8">
       <div>
-        <h2><%=  @accommodation.type_of_place %> in "location"</h2>
-          <ul style="list-style: none" class="side-by-side">
-            <li>max_guest_count</li>
-            <li><%= @accommodation.bedroom_count %> bedrooms</li>
-            <li><%= @accommodation.bed_count %> beds</li>
-            <li><%= @accommodation.bathroom_count %> bathrooms</li>
-            <li>Rating: <%= @accommodation.rating %> stars</li>
-          </ul>
+        <h2><%=  @accommodation.type_of_place %> in <%= @accommodation.city %>, <%= @accommodation.country%></h2>
+        <div class="d-flex justify-content-between">
+          <%= @accommodation.max_guest_count %> guests
+          <%= @accommodation.bedroom_count %> bedrooms
+          <%= @accommodation.bed_count %> beds
+          <%= @accommodation.bathroom_count %> bathrooms
+        </div>
+        <div class="d-flex">
+          <%= @accommodation.rating %> stars
+          <a href="#"><%= @accommodation.reviews.length %> reviews</a>
+
+        </div>
       </div>
 
       <hr>
 
-      <div class="d-flex flex-row">
+      <div class="d-flex">
         <div class="row">
-          <div class="col-6">
-            <p>Link to host's profile</p>
+          <div class="col-2">
+            <a href="url">Host's avatar</a>
           </div>
-          <div class="col-6">
-            <p>Hosted by <%= @accommodation.host_name %></p>
+
+          <div class="col-8">
+            <h3> Hosted by <%= @accommodation.host_name %></h3>
+            <div class="d-flex justify-content-between">
+              <p>Superhost</p> |
+              <p>1 year hosting</p>
+            </div>
           </div>
         </div>
       </div>
@@ -62,12 +93,12 @@
       <hr>
 
       <div>
-        <h4>Designed for staying cool</h4>
-        <p>Beat the heat with the A/C and ceiling fan.</p>
-        <h4>Self check-in</h4>
-        <p>Check yourself in with the smartlock.</p>
-        <h4>Free cancellation before 6 Dec</h4>
-        <p>Get a full refund if you change your mind.</p>
+        <h3>Designed for staying cool</h3>
+          <p>Beat the heat with the A/C and ceiling fan.</p>
+        <h3>Self check-in</h3>
+          <p>Check yourself in with the smartlock.</p>
+        <h3>Free cancellation before 6 Dec</h3>
+          <p>Get a full refund if you change your mind.</p>
       </div>
 
       <hr>
@@ -80,13 +111,18 @@
 
       <div>
         <h2>Where you'll sleep</h2>
+          <%= image_tag "bedroom.webp", alt: "", class: 'w-50 mb-3' %>
+          <h4>Bedroom</h4>
+          <p>1 queen bed</p>
+
+
       </div>
 
       <hr>
 
       <div>
         <h2>What this place offers</h2>
-        <ul>
+        <ul class="list-unstyled">
           <% @accommodation.amenities.each do |amenity| %>
             <li><%= amenity.name %></li>
           <% end %>
@@ -103,8 +139,7 @@
       <hr>
 
       <div>
-        <h2><%= @accommodation.rating %> stars, <%= Review.all.length %> reviews</h2>
-
+        <h2><%= @accommodation.rating %> stars • <%= @accommodation.reviews.count %> reviews</h2>
       </div>
 
       <hr>
@@ -113,7 +148,9 @@
 
       <div class="list-group d-flex flex-row flex-wrap">
         <ul>
-          
+          <% @accommodation.reviews.each do |review| %>
+            <li><%= review.content %></li>
+          <% end %>
         </ul>
         <a class="btn btn-primary" href="#" role="button">Show more reviews</a>
       </div>
@@ -129,7 +166,45 @@
 
       <div>
         <h2>Meet your host</h2>
-        <%= @accommodation.host_name %>
+          <div class="row">
+            <div class="col-6">
+              <div class="bg-white rounded shadow p-3 mb-3">
+                <div class="d-flex justify-content-between">
+                  <div class="col-6">
+                    <p>Host's brand image</p>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="border-bottom">
+                      <p>10,000+</p>
+                      <p>reviews</p>
+                    </div>
+                    <div class="border-bottom">
+                      <p>4.75</p>
+                      <p>ratings</p>
+                    </div>
+                    <div>
+                      <p>6 years</p>
+                      <p>hosting</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <p>Speaks Chinese, English and Malay</p>
+              <p>Lives in <%= @accommodation.city %>, <%= @accommodation.country %></p>
+              <p>Hello Guests! We are a group of enthusiastic and open-minded peers who love to explore, <a href="#">show more</a></p>
+            </div>
+
+            <div class="col-6">
+              <h3>Host details</h3>
+              <p>Response rate: 100%</p>
+              <p>Responds within an hour</p>
+              <a class="btn btn-primary" href="#" role="button">Link</a>
+            </div>
+
+          </div>
       </div>
 
       <hr>
@@ -138,29 +213,30 @@
         <h2>Things to know</h2>
           <div class="col-4">
             <h3>House rules</h3>
-              <ul>
+              <ul class="list-unstyled">
                 <li>Check-in after 3:00pm</li>
                 <li>Check-out before 11:00am</li>
                 <li>4 guests maximum</li>
               </ul>
+              <a href="#">Show more</a></p>
           </div>
 
           <div class="col-4">
             <h3>Safety and property</h3>
-              <ul>
-                <li>Check-in after 3:00pm</li>
-                <li>Check-out before 11:00am</li>
-                <li>4 guests maximum</li>
+              <ul class="list-unstyled">
+                <li>No smoke alarm</li>
+                <li>Carbon monoxide detector not required</li>
               </ul>
+              <a href="#">Show more</a></p>
           </div>
 
           <div class="col-4">
             <h3>Cancellation policy</h3>
-              <ul>
-                <li>Check-in after 3:00pm</li>
-                <li>Check-out before 11:00am</li>
-                <li>4 guests maximum</li>
+              <ul class="list-unstyled">
+                <li>Free cancellation before 6 Dec. Cancel before check-in on 7 Dec for a partial refund.</li>
+                <li>Review this Host’s full policy for details.</li>
               </ul>
+              <a href="#">Show more</a></p>
           </div>
 
       </div>

@@ -1,5 +1,10 @@
 class AccommodationsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :show
+  skip_before_action :authenticate_user!, only: %i[show index]
+
+  def index
+    @accommodations = Accommodation.all
+    @amenities = Amenity.all
+  end
 
   def show
     @accommodation = Accommodation.find(params[:id])
@@ -30,4 +35,5 @@ class AccommodationsController < ApplicationController
   def accommodation_params
     params.require(:accommodation).permit(:type_of_place, :price, :rating, :address, :bed_count, :bedroom_count, :bathroom_count, :title, :city, :country, :max_guest_count, :description)
   end
+
 end
