@@ -1,0 +1,67 @@
+<div class="container">
+  <h1>All bookings</h1>
+
+
+
+  <div class="div">
+    <h2>Pending bookings:</h2>
+
+    <div class="d-flex">
+
+      <% if @pending_bookings.empty? %>
+        <p><strong>No current pending bookings!</strong></p>
+      <% else %>
+        <% @pending_bookings.each do |booking|  %>
+        <div class="">
+          <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-100" %>
+          <p><strong><%= booking.accommodation.title %></strong>  </p>
+          <p>Owned by: <%= booking.accommodation.host_name %></p>
+          <p><%= booking.start_date %> to <%= booking.end_date %></p>
+          <div class="d-flex">
+            <%= link_to('Accept', accept_booking_path(booking)) %>
+            <a class="btn btn-danger">Decline</a>
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="div">
+    <h2>Accepted bookings:</h2>
+
+    <div class="d-flex">
+      <% current_user.booking_requests.where(status: 'Accepted').each do |booking|  %>
+        <div class="">
+            <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
+            <p><strong><%= booking.accommodation.title %></strong></p>
+            <p>Owned by: <%= booking.accommodation.host_name %></p>
+            <p><%= booking.start_date %> to <%= booking.end_date %></p>
+          </div>
+        <% end %>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="div">
+    <h2>Completed bookings:</h2>
+
+    <div class="d-flex">
+      <% current_user.booking_requests.where(status: 'Declined').each do |booking|  %>
+        <div class="">
+            <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
+            <p><strong><%= booking.accommodation.title %></strong></p>
+            <p>Owned by: <%= booking.accommodation.host_name %></p>
+            <p><%= booking.start_date %> to <%= booking.end_date %></p>
+          </div>
+        <% end %>
+    </div>
+
+  </div>
+
+</div>

@@ -24,6 +24,8 @@ class Accommodation < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
+  scope :that_belongs_to, ->(user) { where(user: user) }
+
   def host_name
     user.display_name
   end
@@ -31,4 +33,6 @@ class Accommodation < ApplicationRecord
   def cl_image?(index)
     photos[index].present? && photos[index].key?
   end
+
+
 end
