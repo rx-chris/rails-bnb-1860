@@ -12,17 +12,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="get">
+        <%= form_with url: "/", method: :get, class:"filter-modal" do |form|%>
           <%# Type of place %>
           <div>
             <h2>Type of place</h2>
             <div class="d-flex justify-content-center align-items-center">
               <div class="btn-group" role="group" aria-label="type-of-place">
-                <input type="radio" class="btn-check" name="type-of-place" id="any-type" autocomplete="off" checked>
+                <input type="radio" class="btn-check" name="type_of_place" id="any-type" autocomplete="off" value="any" checked>
                 <label class="btn btn-outline-primary" for="any-type">Any Type</label>
-                <input type="radio" class="btn-check" name="type-of-place" id="room" autocomplete="off">
+                <input type="radio" class="btn-check" name="type_of_place" id="room" value="Room" autocomplete="off">
                 <label class="btn btn-outline-primary" for="room">Room</label>
-                <input type="radio" class="btn-check" name="type-of-place" id="entire-home" autocomplete="off">
+                <input type="radio" class="btn-check" name="type_of_place" id="entire-home" value="Entire home" autocomplete="off">
                 <label class="btn btn-outline-primary" for="entire-home">Entire Home</label>
               </div>
             </div>
@@ -32,49 +32,46 @@
           <div>
             <h2>Price Range</h2>
             <p>Nightly prices before fees and taxes</p>
-            <div class="d-flex">
-              <input type="range" class="w-100">
-              <input type="range" class="w-100">
+            <input type="range" class="w-100 d-none">
+            <input type="range" class="w-100 d-none">
+            <div class="d-flex justify-content-between">
+              <div class="flex">
+                <label for="minimum-price">Minimum</label>
+                <input type="number" id="minimum-price" name="minimum_price" value=0 class="form-control">
+              </div>
+              <div class="flex">
+                <label for="maximum-price">Maximum</label>
+                <input type="number" id="maximum-price" name="maximum_price" value=500 class="form-control">
+              </div>
             </div>
           </div>
           <hr>
           <%# Rooms and Beds %>
           <div>
             <h2>Rooms and beds</h2>
-            <div class="d-flex align-items-center">
-              <div class="flex-grow-1">Bedrooms</div>
-              <button>-</button>
-              <div>Any</div>
-              <button>+</button>
-            </div>
-            <div class="d-flex align-items-center">
-              <div class="flex-grow-1">Beds</div>
-              <button>-</button>
-              <div>Any</div>
-              <button>+</button>
-            </div>
-            <div class="d-flex align-items-center">
-              <div class="flex-grow-1">Bathrooms</div>
-              <button>-</button>
-              <div>Any</div>
-              <button>+</button>
-            </div>
+            <%= render "accommodations/rooms_and_beds", title: 'Bedrooms', key: :bedroom_count %>
+            <%= render "accommodations/rooms_and_beds", title: 'Beds', key: :bed_count %>
+            <%= render "accommodations/rooms_and_beds", title: 'Bathrooms', key: :bathroom_count %>
           </div>
           <hr>
           <%# Amenities %>
           <div>
             <h2>Amenities</h2>
             <% @amenities.each do|amenity| %>
-              <button class="btn btn-outline-secondary rounded-3"><%= amenity.name%></button>
+              <% id = amenity.name.downcase.gsub(/\s+/, '-')%>
+              <input type="checkbox" id="<%=id%>" name="amenities[]" value="<%=amenity.id%>" class="d-none"/>
+              <label for="<%=id%>" class="btn btn-outline-secondary rounded-3 my-1">
+                <%= amenity.name%>
+              </label>
             <% end %>
           </div>
         </div>
         <%# modal footer %>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <%= form.submit "Filter Results", class: "btn btn-primary"%>
         </div>
-      </form>
+      <% end %>
     </div>
   </div>
 </div>

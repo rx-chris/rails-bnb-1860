@@ -1,0 +1,5 @@
+form.filter-modal {
+  input[type="checkbox"]:checked + label {
+    border: 2px double black;
+  }
+}
