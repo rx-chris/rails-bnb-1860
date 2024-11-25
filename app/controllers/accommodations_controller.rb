@@ -11,7 +11,8 @@ class AccommodationsController < ApplicationController
     @marker = [
       {
       lat: @accommodation.latitude,
-      lng: @accommodation.longitude
+      lng: @accommodation.longitude,
+      info_window_html: render_to_string(partial: "info_window", locals: {accommodation: @accommodation})
       }]
   end
 
