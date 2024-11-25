@@ -110,9 +110,15 @@
         <a class="btn btn-primary" href="#" role="button">Show more amenities</a>
       </div>
       <hr>
-      <div>
-        <h2>Calendar</h2>
-      </div>
+
+
+      <h2>Calendar</h2>
+        <div class="d-flex">
+          <div data-controller="datepicker" class="w-100" data-datepicker-inline-value="true"></div>
+          <div data-controller="datepicker" class="w-100" data-datepicker-inline-value="true"></div>
+        </div>
+
+
       <hr>
       <div>
         <h2><%= @accommodation.rating %> stars • <%= @accommodation.reviews.count %> reviews</h2>
