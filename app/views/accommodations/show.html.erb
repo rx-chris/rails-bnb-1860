@@ -59,13 +59,13 @@
     <div class="col-8">
       <div>
         <h2><%=  @accommodation.type_of_place %> in <%= @accommodation.city %>, <%= @accommodation.country%></h2>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex">
           <%= @accommodation.max_guest_count %> guests
           <%= @accommodation.bedroom_count %> bedrooms
           <%= @accommodation.bed_count %> beds
           <%= @accommodation.bathroom_count %> bathrooms
         </div>
-        <div class="d-flex">
+        <div class="d-flex gap-2">
           <%= @accommodation.rating %> stars
           <a href="#"><%= @accommodation.reviews.length %> reviews</a>
 
@@ -82,8 +82,8 @@
 
           <div class="col-8">
             <h3> Hosted by <%= @accommodation.host_name %></h3>
-            <div class="d-flex justify-content-between">
-              <p>Superhost</p> |
+            <div class="d-flex gap-2">
+              <p>Superhost</p> •
               <p>1 year hosting</p>
             </div>
           </div>

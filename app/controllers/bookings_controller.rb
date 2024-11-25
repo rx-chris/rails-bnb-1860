@@ -9,4 +9,11 @@ class BookingsController < ApplicationController
     @booking.save
     redirect_to bookings_path
   end
+
+  def decline
+    @booking = Booking.find(params[:id])
+    @booking.declined!
+    @booking.save
+    redirect_to bookings_path
+  end
 end
