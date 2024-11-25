@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_many :bookings, dependent: :destroy
   has_many :accommodations, dependent: :destroy
+  has_many :booking_requests,
+    through: :accommodations,
+    source: 'bookings',
+    class_name: 'Booking'
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true

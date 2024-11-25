@@ -10,4 +10,11 @@ Rails.application.routes.draw do
   root "accommodations#index"
 
   resources :accommodations, only: [:index, :new, :show, :create]
+  resources :bookings, only: [:index] do
+    member do
+      get :accept
+      get :decline
+    end
+  end
+
 end
