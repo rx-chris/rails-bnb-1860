@@ -151,16 +151,25 @@ end
 puts "Created #{Accommodation.all.length} accommodation"
 
 # create bookings
+accommodations = Accommodation.all
+
 20.times do |i|
   start_date = Date.today + rand(2..5)
   end_date = start_date + rand(3..10)
+
+  # remove the owner of the accommodation from the list of
+  # users to prevent them from booking their own accommodations
+  # we don't advocate money laundering
+  accommodation = accommodations.sample
+  users = User.all.to_a - [accommodation.user]
+
   Booking.create!(
     start_date: start_date,
     end_date: end_date,
     guest_count: rand(1..7),
     status: Booking::STATUSES.sample,
-    user: User.all.sample,
-    accommodation: Accommodation.all.sample
+    user: users.sample,
+    accommodation: accommodation
   )
 end
 

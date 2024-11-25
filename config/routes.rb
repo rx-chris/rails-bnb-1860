@@ -12,4 +12,12 @@ Rails.application.routes.draw do
   resources :accommodations, only: [:index, :new, :show, :create] do
     resources :bookings, only: [:create]
   end
+
+  resources :bookings, only: [:index] do
+    member do
+      get :accept
+      get :decline
+    end
+  end
+
 end

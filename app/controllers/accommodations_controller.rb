@@ -4,11 +4,49 @@ class AccommodationsController < ApplicationController
   def index
     @accommodations = Accommodation.all
     @amenities = Amenity.all
+
+    # filter by type of place
+    if(params.key?(:type_of_place) and params[:type_of_place] != "any")
+      @accommodations = @accommodations.where(type_of_place: params[:type_of_place])
+    end
+
+    # filter by price range
+    if params.key?(:minimum_price)
+      @accommodations = @accommodations.where('price >= ?', params[:minimum_price])
+    end
+
+    if params.key?(:maximum_price)
+      @accommodations = @accommodations.where('price <= ?', params[:maximum_price])
+    end
+    # filter by rooms and beds
+    if params.key?(:bed_count)
+      @accommodations = @accommodations.where('bed_count >= ?', params[:bed_count])
+    end
+    if params.key?(:bedroom_count)
+      @accommodations = @accommodations.where('bedroom_count >= ?', params[:bedroom_count])
+    end
+    if params.key?(:bathroom_count)
+      @accommodations = @accommodations.where('bathroom_count >= ?', params[:bathroom_count])
+    end
+    # filter by amenities
+    if params.key?(:amenities)
+      @accommodations = @accommodations.select do |accom|
+        params[:amenities].all? do |id|
+          accom.amenities.find_by_id(id)
+        end
+      end
+    end
   end
 
   def show
     @accommodation = Accommodation.find(params[:id])
     @booking = Booking.new
+    @marker = [
+      {
+      lat: @accommodation.latitude,
+      lng: @accommodation.longitude,
+      info_window_html: render_to_string(partial: "info_window", locals: {accommodation: @accommodation})
+      }]
   end
 
   def new
