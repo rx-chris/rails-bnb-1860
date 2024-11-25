@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index] do
     member do
       get :accept
+      get :decline
     end
   end
 
