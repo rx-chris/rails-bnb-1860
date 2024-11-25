@@ -1,75 +1,134 @@
 <div class="container">
   <h1>All bookings</h1>
 
-  <div class="d-flex gap-3">
-    <a href="url">My apartments</a>
-    <a href="url">My bookings</a>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Incoming booking requests</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">My bookings</button>
+    </li>
 
-  </div>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="div">
+        <h2>Pending bookings:</h2>
 
-  <hr>
+          <div class="d-flex">
 
+            <% if @pending_booking_requests.empty? %>
+              <p><strong>No current pending bookings!</strong></p>
+            <% else %>
+              <% @pending_booking_requests.each do |booking|  %>
+              <div class="">
+                <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
+                <p><strong><%= booking.accommodation.title %></strong>  </p>
+                <p>Owned by: <%= booking.accommodation.host_name %></p>
+                <p><%= booking.start_date %> to <%= booking.end_date %></p>
+                <div class="d-flex gap-3">
+                  <%= link_to('Accept', accept_booking_path(booking)) %>
+                  <%= link_to('Declined', decline_booking_path(booking)) %>
+                </div>
+              </div>
+              <% end %>
+            <% end %>
+          </div>
+      </div>
 
-  <div class="div">
-    <h2>Pending bookings:</h2>
+      <hr>
 
-    <div class="d-flex">
+      <div class="div">
+        <h2>Accepted bookings:</h2>
 
-      <% if @pending_bookings.empty? %>
-        <p><strong>No current pending bookings!</strong></p>
-      <% else %>
-        <% @pending_bookings.each do |booking|  %>
-        <div class="">
-          <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
-          <p><strong><%= booking.accommodation.title %></strong>  </p>
-          <p>Owned by: <%= booking.accommodation.host_name %></p>
-          <p><%= booking.start_date %> to <%= booking.end_date %></p>
-          <div class="d-flex gap-3">
-            <%= link_to('Accept', accept_booking_path(booking)) %>
-            <%= link_to('Declined', decline_booking_path(booking)) %>
+        <div class="d-flex">
+          <% current_user.booking_requests.where(status: 'Accepted').each do |booking|  %>
+            <div class="">
+              <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
+              <p><strong><%= booking.accommodation.title %></strong></p>
+              <p>Owned by: <%= booking.accommodation.host_name %></p>
+              <p><%= booking.start_date %> to <%= booking.end_date %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="div">
+        <h2>Declined bookings:</h2>
+
+        <div class="d-flex">
+          <% current_user.booking_requests.where(status: 'Declined').each do |booking|  %>
+            <div class="">
+              <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
+              <p><strong><%= booking.accommodation.title %></strong></p>
+              <p>Owned by: <%= booking.accommodation.host_name %></p>
+              <p><%= booking.start_date %> to <%= booking.end_date %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="div">
+        <h2>Pending bookings:</h2>
+
+        <div class="d-flex">
+
+          <% if @pending_bookings.empty? %>
+            <p><strong>No current pending bookings!</strong></p>
+          <% else %>
+            <% @pending_bookings.each do |booking|  %>
+            <div class="">
+              <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
+              <p><strong><%= booking.accommodation.title %></strong>  </p>
+              <p>Owned by: <%= booking.accommodation.host_name %></p>
+              <p><%= booking.start_date %> to <%= booking.end_date %></p>
+              <div class="d-flex gap-3">
+                <%= link_to('Accept', accept_booking_path(booking)) %>
+                <%= link_to('Declined', decline_booking_path(booking)) %>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+    <hr>
+
+    <div class="div">
+      <h2>Accepted bookings:</h2>
+
+        <div class="d-flex">
+          <% current_user.bookings.where(status: 'Accepted').each do |booking|  %>
+            <div class="">
+              <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
+              <p><strong><%= booking.accommodation.title %></strong></p>
+              <p>Owned by: <%= booking.accommodation.host_name %></p>
+              <p><%= booking.start_date %> to <%= booking.end_date %></p>
+              </div>
+          <% end %>
+        </div>
+    </div>
+
+    <hr>
+
+        <div class="div">
+          <h2>Declined bookings:</h2>
+
+          <div class="d-flex">
+            <% current_user.bookings.where(status: 'Declined').each do |booking|  %>
+              <div class="">
+                <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
+                <p><strong><%= booking.accommodation.title %></strong></p>
+                <p>Owned by: <%= booking.accommodation.host_name %></p>
+                <p><%= booking.start_date %> to <%= booking.end_date %></p>
+              </div>
+            <% end %>
           </div>
         </div>
-        <% end %>
-      <% end %>
-
-    </div>
+      </div>
   </div>
-
-  <hr>
-
-  <div class="div">
-    <h2>Accepted bookings:</h2>
-
-    <div class="d-flex">
-      <% current_user.booking_requests.where(status: 'Accepted').each do |booking|  %>
-        <div class="">
-            <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
-            <p><strong><%= booking.accommodation.title %></strong></p>
-            <p>Owned by: <%= booking.accommodation.host_name %></p>
-            <p><%= booking.start_date %> to <%= booking.end_date %></p>
-          </div>
-        <% end %>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="div">
-    <h2>Declined bookings:</h2>
-
-    <div class="d-flex">
-      <% current_user.booking_requests.where(status: 'Declined').each do |booking|  %>
-        <div class="">
-            <%= cl_image_tag booking.accommodation.photos[0].key, class: "w-100 h-50" %>
-            <p><strong><%= booking.accommodation.title %></strong></p>
-            <p>Owned by: <%= booking.accommodation.host_name %></p>
-            <p><%= booking.start_date %> to <%= booking.end_date %></p>
-          </div>
-        <% end %>
-    </div>
-  </div>
-
-
-
 </div>
