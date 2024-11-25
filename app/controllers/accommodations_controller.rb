@@ -8,6 +8,12 @@ class AccommodationsController < ApplicationController
 
   def show
     @accommodation = Accommodation.find(params[:id])
+    @marker = [
+      {
+      lat: @accommodation.latitude,
+      lng: @accommodation.longitude,
+      info_window_html: render_to_string(partial: "info_window", locals: {accommodation: @accommodation})
+      }]
   end
 
   def new
