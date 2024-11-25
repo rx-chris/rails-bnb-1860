@@ -1,24 +1,30 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="counter"
 export default class extends Controller {
-  static targets = ["total"]
+  static targets = ["label", "input"];
 
   connect() {
+    console.log("connected");
   }
 
-  decrement(event) {
-    event.stopPropagation();
-    const value = parseInt(this.totalTarget.value);
-    if (value > 0) { this.totalTarget.value -= 1 };
-
+  increment() {
+    const count = this.count;
+    this.count = count + 1;
   }
 
-  increment(event) {
-    event.stopPropagation();
-    const value = parseInt(this.totalTarget.value);
-    this.totalTarget.value = value + 1;
+  decrement() {
+    const count = this.count;
+    if (count <= 0) return;
+    this.count = count - 1;
   }
 
+  get count() {
+    return parseInt(this.inputTarget.value);
+  }
 
+  set count(value) {
+    this.labelTarget.innerHTML = value === 0 ? "Any" : value;
+    this.inputTarget.value = value;
+  }
 }
